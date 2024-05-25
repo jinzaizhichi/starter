@@ -27,4 +27,14 @@ lspconfig.pyright.setup {
   on_init = on_init,
   capabilities = capabilities,
   filetype = { "python" },
+  sigle_file_support = true,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "openFilesOnly",
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
 }

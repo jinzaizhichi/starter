@@ -53,4 +53,11 @@ return {
   --     require("better-escape").setup()
   --   end,
   -- },
+  {
+    "nvimtools/none-ls.nvim",
+    ft = { "python" },
+    config = function()
+      require "configs.null-ls"
+    end,
+  },
 }
