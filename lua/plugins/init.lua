@@ -59,5 +59,6 @@ return {
     config = function()
       require "configs.null-ls"
     end,
+    requires = { "nvim-lua/plenary.nvim" },
   },
 }
