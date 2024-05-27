@@ -53,4 +53,8 @@ return {
   --     require("better-escape").setup()
   --   end,
   -- },
+  {
+    "wakatime/vim-wakatime",
+    event = "VeryLazy",
+  },
 }
