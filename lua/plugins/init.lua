@@ -76,6 +76,9 @@ return {
     },
   },
   {
-    "yianwillis/vimcdoc",
+    "tpope/vim-surround",
+  },
+  {
+    "tpope/vim-repeat",
   },
 }
