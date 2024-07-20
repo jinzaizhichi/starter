@@ -82,6 +82,6 @@ return {
     "tpope/vim-repeat",
   },
   {
-    "MeteorNvim/MeteorNvim",
+    "jinzaizhichi/MeteorNvim",
   },
 }
