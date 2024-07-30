@@ -7,7 +7,7 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jj", "<ESC>")
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-map({ "n", "x" }, "mm", "<Cmd>Translate<CR>", { desc = " Translate" })
+-- map({ "n", "x" }, "mm", "<Cmd>Translate<CR>", { desc = " Translate" })
 --     keys = {
 --       -- 可以换成其他你想映射的键
 --       { "mm", mode = { "n", "x" }, "<Cmd>Translate<CR>", desc = " Translate" },
