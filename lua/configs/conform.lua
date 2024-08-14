@@ -1,8 +1,8 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
+    css = { "prettier" },
+    html = { "prettier" },
     python = function(bufnr)
       if require("conform").get_formatter_info("ruff_format", bufnr).available then
         return { "ruff_format" }
@@ -17,7 +17,8 @@ local options = {
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,
-    lsp_fallback = true,
+    -- lsp_fallback = true,
+    lsp_format = "fallback",
   },
 }
 
