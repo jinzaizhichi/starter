@@ -19,5 +19,8 @@ call plug#begin()
 Plug 'scrooloose/nerdtree' 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'vim-airline/vim-airline'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
