@@ -15,13 +15,18 @@ set incsearch
 set scrolloff=8
 set guicursor=
 set showcmd
+set showmode
+set laststatus=2
+set cmdheight=2
+set scrolloff=3
+set backspace=2
 set noerrorbells
 set novisualbell 
-set t_vb=
 
 set termguicolors
 colorscheme tokyonight
 set background=dark
+set history=1000
 
 let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
@@ -44,7 +49,8 @@ Plug 'preservim/tagbar'
 Plug 'voldikss/vim-floaterm'
 Plug 'Yggdroot/LeaderF',{'do':':LeaderfInstallCExtension'}
 Plug 'ludovicchabant/vim-gutentags'
-
+Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim',{'branch':'release'}
 
 
 call plug#end()
