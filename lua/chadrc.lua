@@ -22,7 +22,7 @@ M.mason.pkgs = {
   "black",
   "debugpy",
   "mypy",
-  "ruff",
+  "ruff-lsp",
   "pyright",
 }
 

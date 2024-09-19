@@ -10,8 +10,8 @@ local options = {
         return { "isort", "black" }
       end
     end,
-    ["*"] = { "codespell" },
-    ["_"] = { "trim_whitespace" },
+    -- ["*"] = { "codespell" },
+    -- ["_"] = { "trim_whitespace" },
   },
 
   format_on_save = {
