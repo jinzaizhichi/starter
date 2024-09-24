@@ -6,6 +6,7 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jj", "<ESC>")
+map("i", "jk", "<ESC>")
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- map({ "n", "x" }, "mm", "<Cmd>Translate<CR>", { desc = " Translate" })
 --     keys = {
@@ -15,5 +16,5 @@ map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 --       -- 目前这个功能的视窗还没有做好，可以在配置里将view.i改成hover
 --       { "mi", "<Cmd>TranslateInput<CR>", desc = " Translate From Input" },
 --     },
-map("n", "ZZ", "<cmd> wqa <CR>", { desc = "GENERAL Quit nvim" })
+map("n", "ZZ", "<cmd> qa <CR>", { desc = "GENERAL Quit nvim" })
 map({ "n", "i" }, "<C-z>", ":undo <CR>", { desc = "GENERAL Undo" })
