@@ -1,8 +1,9 @@
 require "nvchad.options"
 
 -- add yours here!
-vim.opt.relativenumber = true
+local opt = vim.opt
 local o = vim.o
+opt.relativenumber = true
 o.cursorlineopt = "both" -- to enable cursorline!
 -- 缺省行号为relativenumber
 -- o.ruler = true
