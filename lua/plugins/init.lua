@@ -91,8 +91,8 @@ return {
     "jinzaizhichi/MeteorNvim",
   },
   -- lightspeed.nvim
-  {
-    "ggandor/lightspeed.nvim",
-    event = "VimEnter",
-  },
+  -- {
+  --   "ggandor/lightspeed.nvim",
+  --   event = "VimEnter",
+  -- },
 }
