@@ -37,3 +37,12 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- vscode format i.e json files
+vim.g.vscode_snippets_path = "~/.config/nvim/snippets/"
+
+-- snipmate format
+vim.g.snipmate_snippets_path = "~/.config/nvim/snippets/"
+
+-- lua format
+vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/lua_snippets"
