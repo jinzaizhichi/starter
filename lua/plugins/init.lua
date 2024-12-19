@@ -50,6 +50,7 @@ return {
   -- {
   --   "max397574/better-escape.nvim",
   --   event = "InsertEnter",
+  --   config
   --   config = function()
   --     require("better-escape").setup()
   --   end,
@@ -95,4 +96,8 @@ return {
   --   "ggandor/lightspeed.nvim",
   --   event = "VimEnter",
   -- },
+  {
+    "github/copilot.vim",
+    event = "VeryLazy",
+  },
 }
