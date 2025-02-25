@@ -96,8 +96,8 @@ return {
   --   "ggandor/lightspeed.nvim",
   --   event = "VimEnter",
   -- },
-  {
-    "github/copilot.vim",
-    event = "VeryLazy",
-  },
+  -- {
+  --   "github/copilot.vim",
+  --   event = "VeryLazy",
+  -- },
 }
