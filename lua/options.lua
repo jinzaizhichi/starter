@@ -6,6 +6,7 @@ local o = vim.o
 opt.relativenumber = true
 o.cursorlineopt = "both" -- to enable cursorline!
 o.textwidth = 80
+o.wrap = true
 -- 缺省行号为relativenumber
 -- o.ruler = true
 -- o.clipboard = "unnamedplus"
