@@ -1,23 +1,23 @@
 return {
   {
-    "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    'stevearc/conform.nvim',
+    event = 'BufWritePre', -- uncomment for format on save
     config = function()
-      require "configs.conform"
+      require('configs.conform')
     end,
   },
 
   -- These are some examples, uncomment them if you want to see them work!
   {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
+      require('nvchad.configs.lspconfig').defaults()
+      require('configs.lspconfig')
     end,
   },
 
   {
-    "williamboman/mason.nvim",
+    'williamboman/mason.nvim',
     -- opts = {
     -- ensure_installed = {
     --   "lua-language-server",
@@ -36,14 +36,14 @@ return {
   },
 
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     opts = {
       ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
+        'vim',
+        'lua',
+        'vimdoc',
+        'html',
+        'css',
       },
     },
   },
@@ -56,40 +56,40 @@ return {
   --   end,
   -- },
   {
-    "wakatime/vim-wakatime",
-    event = "VeryLazy",
+    'wakatime/vim-wakatime',
+    event = 'VeryLazy',
   },
   {
 
-    "JuanZoran/Trans.nvim",
+    'JuanZoran/Trans.nvim',
     build = function()
-      require("Trans").install()
+      require('Trans').install()
     end,
     keys = {
       -- 可以换成其他你想映射的键
-      { "mm", mode = { "n", "x" }, "<Cmd>Translate<CR>", desc = " Translate" },
-      { "mk", mode = { "n", "x" }, "<Cmd>TransPlay<CR>", desc = " Auto Play" },
+      { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
+      { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = ' Auto Play' },
       -- 目前这个功能的视窗还没有做好，可以在配置里将view.i改成hover
-      { "mi", "<Cmd>TranslateInput<CR>", desc = " Translate From Input" },
+      { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
-    dependencies = { "kkharji/sqlite.lua" },
+    dependencies = { 'kkharji/sqlite.lua' },
     opts = {
       -- your configuration there
     },
   },
   {
-    "tpope/vim-surround",
+    'tpope/vim-surround',
     -- version = "å*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    event = 'VeryLazy',
     -- config = function()
     --   require("nvim-surround").setup {}
     -- end,
   },
   {
-    "tpope/vim-repeat",
+    'tpope/vim-repeat',
   },
   {
-    "jinzaizhichi/MeteorNvim",
+    'jinzaizhichi/MeteorNvim',
   },
   -- lightspeed.nvim
   -- {
@@ -97,7 +97,7 @@ return {
   --   event = "VimEnter",
   -- },
   -- {
-  --   "github/copilot.vim",
-  --   event = "VeryLazy",
+  --   'github/copilot.vim',
+  --   event = 'VeryLazy',
   -- },
 }
