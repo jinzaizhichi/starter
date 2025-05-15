@@ -100,4 +100,9 @@ return {
   --   'github/copilot.vim',
   --   event = 'VeryLazy',
   -- },
+  { import = 'nvchad.blink.lazyspec' },
+  {
+    'Saghen/blink.cmp',
+    opts = require('configs.blink'),
+  },
 }
