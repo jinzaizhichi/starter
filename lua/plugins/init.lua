@@ -105,4 +105,11 @@ return {
     'Saghen/blink.cmp',
     opts = require('configs.blink'),
   },
+  -- {
+  --   -- Gemini CLI 插件
+  --   'kiddos/gemini.nvim',
+  --   opts = {
+  --     model = 'gemini-1.5-flash',
+  --   },
+  -- },
 }
