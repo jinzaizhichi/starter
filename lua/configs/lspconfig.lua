@@ -3,12 +3,14 @@ local on_attach = require('nvchad.configs.lspconfig').on_attach
 local on_init = require('nvchad.configs.lspconfig').on_init
 local capabilities = require('nvchad.configs.lspconfig').capabilities
 
+-- local lspconfig = require('lspconfig')
 local lspconfig = require('lspconfig')
 local servers = { 'html', 'cssls' }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
+    -- vim.lsp.config[lsp].setup({
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
@@ -17,12 +19,14 @@ end
 
 -- typescript
 lspconfig.ts_ls.setup({
+  -- vim.lsp.config.ts_ls.setup({
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
 })
 -- python
 lspconfig.pyright.setup({
+  -- vim.lsp.config.pyright.setup({
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
@@ -42,6 +46,7 @@ lspconfig.pyright.setup({
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
 -- For the default config, along with instructions on how to customize the settings
 require('lspconfig').ruff.setup({
+  -- vim.lsp.config.ruff.setup({
   init_options = {
     settings = {
       -- Any extra CLI arguments for `ruff` go here.
