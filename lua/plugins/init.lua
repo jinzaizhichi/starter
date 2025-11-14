@@ -78,12 +78,14 @@ return {
     },
   },
   {
-    'tpope/vim-surround',
+    -- 'tpope/vim-surround',
     -- version = "å*", -- Use for stability; omit to use `main` branch for the latest features
+    'kylechui/nvim-surround',
+    version = '*',
     event = 'VeryLazy',
-    -- config = function()
-    --   require("nvim-surround").setup {}
-    -- end,
+    config = function()
+      require('nvim-surround').setup()
+    end,
   },
   {
     'tpope/vim-repeat',
