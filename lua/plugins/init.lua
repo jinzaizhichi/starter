@@ -114,4 +114,19 @@ return {
   --     model = 'gemini-1.5-flash',
   --   },
   -- },
+  {
+    'jinzaizhichi/ChatGPT.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('chatgpt').setup({
+        api_host_cmd = "echo 'https://oa.api2d.net'",
+        api_key_cmd= "pass 2dapi/token",
+      })
+    end,
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+  },
 }
