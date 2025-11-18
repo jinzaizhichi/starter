@@ -1,30 +1,13 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls" }
+local servers = { "html", "cssls","ts_ls","pyright","ruff"}
 vim.lsp.enable(servers)
 
--- lsps with default config
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup({
---     -- vim.lsp.config[lsp].setup({
---     on_attach = on_attach,
---     on_init = on_init,
---     capabilities = capabilities,
---   })
--- end
-
--- typescript
--- vim.lsp.config.ts_ls.setup({
---   -- vim.lsp.config.ts_ls.setup({
---   on_attach = on_attach,
---   on_init = on_init,
---   capabilities = capabilities,
--- })
-vim.lsp.enable('ts_ls')
-vim.lsp.enable('pyright')
-vim.lsp.enable('ruff')
-vim.lsp.enable('html')
-vim.lsp.enable('cssls')
+-- vim.lsp.enable('ts_ls')
+-- vim.lsp.enable('pyright')
+-- vim.lsp.enable('ruff')
+-- vim.lsp.enable('html')
+-- vim.lsp.enable('cssls')
 -- python
 -- vim.lsp.config.pyright.setup({
 --   -- vim.lsp.config.pyright.setup({
@@ -93,18 +76,18 @@ vim.lsp.enable('cssls')
 --   require("lspconfig")[name].setup(opts)
 -- end
 -- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
-end
-
--- typescript
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
+-- for _, lsp in ipairs(servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     on_init = on_init,
+--     capabilities = capabilities,
+--   }
+-- end
+--
+-- -- typescript
+-- lspconfig.tsserver.setup {
+--   on_attach = on_attach,
+--   on_init = on_init,
+--   capabilities = capabilities,
+-- }
 -- read :h vim.lsp.config for changing options of lsp servers 
