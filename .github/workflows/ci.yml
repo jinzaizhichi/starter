@@ -1,0 +1,31 @@
+name: Configuration Check (CI)
+
+on:
+  push:
+    branches: [ main, dev, release ] # 在推送到这些分支时触发
+  pull_request:
+    branches: [ main, dev ] # 在向这些分支创建 PR 时触发
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest # 在最新的 Ubuntu 虚拟机上运行
+    steps:
+      - uses: actions/checkout@v4 # 检出您的代码
+
+      - name: Setup Neovim and Dependencies
+        uses: nanotee/nvim-lsp-test-action@v2
+        with:
+          neovim-version: 'stable' # 使用稳定的 Neovim 版本
+
+      - name: Lint Lua files (using stylua)
+        run: |
+          # 假设您已安装 stylua，或者在您的配置中可以找到它
+          # 这个步骤需要根据您实际的配置来确定正确的检查命令
+          # 简单示例：检查 Lua 语法
+          find . -name "*.lua" -exec luac -p {} \;
+        shell: bash
+
+      - name: Check Neovim Config Load (Optional)
+        run: |
+          # 尝试以 headless 模式启动 Neovim，看是否有配置错误
+          nvim --headless '+quitall'
