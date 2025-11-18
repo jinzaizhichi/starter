@@ -15,35 +15,35 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4 # 检出您的代码
 
-      # 👇 使用活跃的 Action 替换 nanotee/nvim-lsp-test-action
-      - name: Setup Neovim (rhysd/action-setup-vim)
-        uses: rhysd/action-setup-vim@v1
+      # 👇 使用 neovim/nvim-action 替换旧 Action
+      - name: Setup Neovim (neovim/nvim-action)
+        uses: neovim/nvim-action@v2
         with:
-          version: 'neovim-stable' # 安装稳定的 Neovim 版本
-          token: ${{ secrets.GITHUB_TOKEN }} # 用于处理下载，通常是必需的
+          # 使用 'stable' 描述符，该 Action 支持
+          version: 'stable' 
 
       - name: Show Neovim Version
         run: nvim --version | head -n 1
-      
+        
       - name: Install Lazy.nvim and Plugins
-        # 尝试以 headless 模式启动 Neovim 并退出。
-        # 如果配置（init.lua）有严重的语法错误或插件加载失败，这一步会失败。
-        # 注意：对于 LazyVim/NvChad，首次运行需要很长时间来下载插件。
-        # 运行 'Lazy sync' 是一个常见但更彻底的测试。
+        # 尝试以 headless 模式启动 Neovim 并强制运行 Lazy sync 和退出。
+        # 如果配置有语法错误或插件加载失败，这一步会失败。
         run: |
-          # 运行 nvim --headless 触发插件管理器加载
+          # 为了确保在 CI 环境中配置可以正确找到目录，我们设置 HOME 环境变量。
+          # 'Lazy sync' 会强制下载/更新插件。
           nvim --headless '+Lazy sync' '+qa!'
         env:
-          # 设置 HOME 环境变量以确保配置能找到正确的路径
           HOME: /home/runner/
         shell: bash
 
       # -------------------------------------------------------------------
-      # 可选步骤：如果您在 CI 中安装了 stylua，可以在这里运行格式化检查
+      # 可选步骤：如果您想运行格式化检查 (例如 stylua)
       # -------------------------------------------------------------------
       # - name: Install Stylua
       #   run: |
-      #     cargo install stylua # 假设您的运行器有 Rust 环境
+      #     # 假设 runner 具备 Rust 环境来安装 stylua
+      #     cargo install stylua
       # - name: Check Lua Formatting
+      #   # 检查所有 Lua 文件是否符合格式规范
       #   run: |
       #     stylua --check lua
