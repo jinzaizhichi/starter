@@ -5,27 +5,45 @@ on:
     branches: [ main, dev, release ] # 在推送到这些分支时触发
   pull_request:
     branches: [ main, dev ] # 在向这些分支创建 PR 时触发
+  workflow_dispatch: # 允许手动从 GitHub 界面运行
 
 jobs:
   lint:
     runs-on: ubuntu-latest # 在最新的 Ubuntu 虚拟机上运行
+
     steps:
-      - uses: actions/checkout@v4 # 检出您的代码
+      - name: Checkout Code
+        uses: actions/checkout@v4 # 检出您的代码
 
-      - name: Setup Neovim and Dependencies
-        uses: nanotee/nvim-lsp-test-action@v2
+      # 👇 使用活跃的 Action 替换 nanotee/nvim-lsp-test-action
+      - name: Setup Neovim (rhysd/action-setup-vim)
+        uses: rhysd/action-setup-vim@v1
         with:
-          neovim-version: 'stable' # 使用稳定的 Neovim 版本
+          version: 'neovim-stable' # 安装稳定的 Neovim 版本
+          token: ${{ secrets.GITHUB_TOKEN }} # 用于处理下载，通常是必需的
 
-      - name: Lint Lua files (using stylua)
+      - name: Show Neovim Version
+        run: nvim --version | head -n 1
+      
+      - name: Install Lazy.nvim and Plugins
+        # 尝试以 headless 模式启动 Neovim 并退出。
+        # 如果配置（init.lua）有严重的语法错误或插件加载失败，这一步会失败。
+        # 注意：对于 LazyVim/NvChad，首次运行需要很长时间来下载插件。
+        # 运行 'Lazy sync' 是一个常见但更彻底的测试。
         run: |
-          # 假设您已安装 stylua，或者在您的配置中可以找到它
-          # 这个步骤需要根据您实际的配置来确定正确的检查命令
-          # 简单示例：检查 Lua 语法
-          find . -name "*.lua" -exec luac -p {} \;
+          # 运行 nvim --headless 触发插件管理器加载
+          nvim --headless '+Lazy sync' '+qa!'
+        env:
+          # 设置 HOME 环境变量以确保配置能找到正确的路径
+          HOME: /home/runner/
         shell: bash
 
-      - name: Check Neovim Config Load (Optional)
-        run: |
-          # 尝试以 headless 模式启动 Neovim，看是否有配置错误
-          nvim --headless '+quitall'
+      # -------------------------------------------------------------------
+      # 可选步骤：如果您在 CI 中安装了 stylua，可以在这里运行格式化检查
+      # -------------------------------------------------------------------
+      # - name: Install Stylua
+      #   run: |
+      #     cargo install stylua # 假设您的运行器有 Rust 环境
+      # - name: Check Lua Formatting
+      #   run: |
+      #     stylua --check lua
