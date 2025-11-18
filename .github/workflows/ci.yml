@@ -27,8 +27,8 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}  # GitHub Secrets 中存用户名
           password: ${{ secrets.EMAIL_PASSWORD }}  # GitHub Secrets 中存密码（App Password）
           subject: "CI Success on ${{ github.ref_name }}"  # 邮件主题，包含分支名
-          to: your-email@example.com  # 收件人
+          to: jinzaizhichi9888@gmail.com  # 收件人
           from: GitHub Actions <noreply@github.com>
           body: |
             Build succeeded on upstream branch: ${{ github.head_ref || github.ref_name }}  # 如果是 PR，用 head_ref（上游分支）；否则用当前分支
-            Details: https://github.com/your-username/your-repo/actions/runs/${{ github.run_id }}
+            Details: https://github.com/jinzaizhichi/started/actions/runs/${{ github.run_id }}
