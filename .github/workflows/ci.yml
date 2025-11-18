@@ -1,34 +1,67 @@
-name: CI Pipeline  # 工作流名称
+name: CI/CD 流程
 
 on:
-  push:  # 推送事件触发
-    branches: [dev, release]  # 支持 dev 和 release 分支
-  pull_request:  # PR 事件触发（合并到 release 时）
-    branches: [release]
+  push: # 推送到 dev 或 release 分支时触发
+    branches: 
+      - dev
+      - release
+  pull_request: # PR 合并到 release 分支时触发 (即 dev -> release 的合并)
+    branches: 
+      - release
 
 jobs:
-  build:  # 作业 ID
-    runs-on: ubuntu-latest  # 运行环境
+  build_and_test: 
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4  # 检出代码
+      - name: 1. 检出代码
+        uses: actions/checkout@v4
 
-      - name: Run tests  # 示例：运行测试（替换成你的命令）
-        run: |
-          echo "Running tests on branch: ${{ github.ref_name }}"  # 输出当前分支名
-          # 这里加你的测试命令，如 npm test 或 go test
-
-      - name: Send mail notification  # 邮件通知步骤（成功时发送）
-        if: success()  # 只在成功时运行
-        uses: dawidd6/action-send-mail@v3  # 邮件 Action
+      - name: 2. 设置 Node.js 环境
+        uses: actions/setup-node@v4
         with:
-          server_address: smtp.gmail.com  # SMTP 服务器（替换成你的，如 Outlook）
+          node-version: '20' # 确保版本匹配你的项目
+
+      - name: 3. 安装依赖
+        run: npm install
+
+      - name: 4. 运行测试
+        run: npm test # 确保您的 package.json 中有这个脚本
+
+      # ----------------------------------------------------
+      # 5. 邮件通知步骤 - 已定制您的邮箱和仓库信息
+      # ----------------------------------------------------
+      
+      - name: 5.1. 成功时发送通知 (分支测试/合并成功)
+        if: success()
+        uses: dawidd6/action-send-mail@v3 
+        with:
+          server_address: smtp.gmail.com 
           server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}  # GitHub Secrets 中存用户名
-          password: ${{ secrets.EMAIL_PASSWORD }}  # GitHub Secrets 中存密码（App Password）
-          subject: "CI Success on ${{ github.ref_name }}"  # 邮件主题，包含分支名
-          to: jinzaizhichi9888@gmail.com  # 收件人
+          username: ${{ secrets.EMAIL_USERNAME }} 
+          password: ${{ secrets.EMAIL_PASSWORD }} 
+          subject: "✅ CI/CD 成功: ${{ github.ref_name }}"
+          to: jinzaizhichi9888@gmail.com # 您的邮箱
           from: GitHub Actions <noreply@github.com>
           body: |
-            Build succeeded on upstream branch: ${{ github.head_ref || github.ref_name }}  # 如果是 PR，用 head_ref（上游分支）；否则用当前分支
-            Details: https://github.com/jinzaizhichi/started/actions/runs/${{ github.run_id }}
+            🎉 构建成功! 代码已通过测试。
+            仓库: jinzaizhichi/starter
+            分支: ${{ github.head_ref || github.ref_name }}
+            详情链接: https://github.com/jinzaizhichi/starter/actions/runs/${{ github.run_id }}
+
+      - name: 5.2. 失败时发送通知 (构建失败)
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com 
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "❌ CI/CD 失败: ${{ github.ref_name }}"
+          to: jinzaizhichi9888@gmail.com # 您的邮箱
+          from: GitHub Actions <noreply@github.com>
+          body: |
+            🚨 构建失败，请检查日志!
+            仓库: jinzaizhichi/starter
+            分支: ${{ github.head_name || github.ref_name }}
+            详情链接: https://github.com/jinzaizhichi/starter/actions/runs/${{ github.run_id }}
