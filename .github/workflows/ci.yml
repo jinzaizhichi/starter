@@ -1,49 +1,28 @@
 name: Configuration Check (CI)
-
-on:
-  push:
-    branches: [ main, dev, release ] # 在推送到这些分支时触发
-  pull_request:
-    branches: [ main, dev ] # 在向这些分支创建 PR 时触发
-  workflow_dispatch: # 允许手动从 GitHub 界面运行
+# ...
 
 jobs:
   lint:
-    runs-on: ubuntu-latest # 在最新的 Ubuntu 虚拟机上运行
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4 # 检出您的代码
+        uses: actions/checkout@v4
 
-      # 👇 使用 neovim/nvim-action 替换旧 Action
-      - name: Setup Neovim (neovim/nvim-action)
-        uses: neovim/nvim-action@v2
+      # 👇 备用方案：使用 rhysd/action-setup-vim，并提供明确的标签
+      - name: Setup Neovim (rhysd/action-setup-vim)
+        uses: rhysd/action-setup-vim@v1
         with:
-          # 使用 'stable' 描述符，该 Action 支持
-          version: 'stable' 
-
+          # IMPORTANT: 必须是明确的 Neovim Git 标签
+          version: 'v0.9.5' # 或者 'v0.10.0' 等具体版本
+          token: ${{ secrets.GITHUB_TOKEN }} 
+          
       - name: Show Neovim Version
         run: nvim --version | head -n 1
-        
+      
       - name: Install Lazy.nvim and Plugins
-        # 尝试以 headless 模式启动 Neovim 并强制运行 Lazy sync 和退出。
-        # 如果配置有语法错误或插件加载失败，这一步会失败。
         run: |
-          # 为了确保在 CI 环境中配置可以正确找到目录，我们设置 HOME 环境变量。
-          # 'Lazy sync' 会强制下载/更新插件。
           nvim --headless '+Lazy sync' '+qa!'
         env:
           HOME: /home/runner/
         shell: bash
-
-      # -------------------------------------------------------------------
-      # 可选步骤：如果您想运行格式化检查 (例如 stylua)
-      # -------------------------------------------------------------------
-      # - name: Install Stylua
-      #   run: |
-      #     # 假设 runner 具备 Rust 环境来安装 stylua
-      #     cargo install stylua
-      # - name: Check Lua Formatting
-      #   # 检查所有 Lua 文件是否符合格式规范
-      #   run: |
-      #     stylua --check lua
