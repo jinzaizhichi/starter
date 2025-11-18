@@ -119,8 +119,8 @@ return {
     event = 'VeryLazy',
     config = function()
       require('chatgpt').setup({
-        api_host_cmd = "echo 'https://oa.api2d.net'",
-        api_key_cmd= "pass 2dapi/token",
+        api_host_cmd = 'pass 2dapi/hostname',
+        api_key_cmd = 'pass 2dapi/token',
       })
     end,
     dependencies = {
