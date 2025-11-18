@@ -1,48 +1,34 @@
-name: Configuration Check (CI)
+name: CI Pipeline  # 工作流名称
 
 on:
-  push:
-    # 仅在推送到 dev 和 release 分支时运行
-    branches: [ dev, release ] 
-  pull_request:
-    # 仅在向 dev 分支创建 PR 时运行 (通常 release 分支PR较少)
-    branches: [ dev ] 
-  workflow_dispatch: # 允许手动从 GitHub 界面运行
+  push:  # 推送事件触发
+    branches: [dev, release]  # 支持 dev 和 release 分支
+  pull_request:  # PR 事件触发（合并到 release 时）
+    branches: [release]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest # 在最新的 Ubuntu 虚拟机上运行
-
+  build:  # 作业 ID
+    runs-on: ubuntu-latest  # 运行环境
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4 # 检出您的代码
+      - name: Checkout code
+        uses: actions/checkout@v4  # 检出代码
 
-      # 使用 rhysd/action-setup-vim，并提供明确的标签
-      - name: Setup Neovim (rhysd/action-setup-vim)
-        uses: rhysd/action-setup-vim@v1
-        with:
-          # IMPORTANT: 使用明确且带 'v' 前缀的 Neovim Git 标签
-          version: 'v0.9.5' # 请替换为当前您希望使用的 Neovim 稳定版本标签
-          token: ${{ secrets.GITHUB_TOKEN }} 
-          
-      - name: Show Neovim Version
-        run: nvim --version | head -n 1
-      
-      - name: Install Lazy.nvim and Plugins
-        # 尝试以 headless 模式启动 Neovim 并强制同步插件
+      - name: Run tests  # 示例：运行测试（替换成你的命令）
         run: |
-          # 运行 'Lazy sync' 来确保所有插件被下载和加载
-          nvim --headless '+Lazy sync' '+qa!'
-        env:
-          HOME: /home/runner/
-        shell: bash
+          echo "Running tests on branch: ${{ github.ref_name }}"  # 输出当前分支名
+          # 这里加你的测试命令，如 npm test 或 go test
 
-      # -------------------------------------------------------------------
-      # 可选步骤：如果您在 CI 中安装了 stylua，可以在这里运行格式化检查
-      # -------------------------------------------------------------------
-      # - name: Install Stylua
-      #   run: |
-      #     cargo install stylua
-      # - name: Check Lua Formatting
-      #   run: |
-      #     stylua --check lua
+      - name: Send mail notification  # 邮件通知步骤（成功时发送）
+        if: success()  # 只在成功时运行
+        uses: dawidd6/action-send-mail@v3  # 邮件 Action
+        with:
+          server_address: smtp.gmail.com  # SMTP 服务器（替换成你的，如 Outlook）
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}  # GitHub Secrets 中存用户名
+          password: ${{ secrets.EMAIL_PASSWORD }}  # GitHub Secrets 中存密码（App Password）
+          subject: "CI Success on ${{ github.ref_name }}"  # 邮件主题，包含分支名
+          to: your-email@example.com  # 收件人
+          from: GitHub Actions <noreply@github.com>
+          body: |
+            Build succeeded on upstream branch: ${{ github.head_ref || github.ref_name }}  # 如果是 PR，用 head_ref（上游分支）；否则用当前分支
+            Details: https://github.com/your-username/your-repo/actions/runs/${{ github.run_id }}
