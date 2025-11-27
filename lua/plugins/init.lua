@@ -151,7 +151,7 @@ return {
   {
     "esmuellert/vscode-diff.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
     config = function()
       require("vscode-diff").setup({
         -- Highlight configuration
