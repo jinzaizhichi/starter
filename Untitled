@@ -1,0 +1,42 @@
+# .github/workflows/notify.yml
+name: Neovim 配置更新通知
+
+on:
+  push:
+    branches: [ dev, release ]
+  pull_request:
+    branches: [ release ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 成功发送邮件
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Neovim 配置已更新 - ${{ github.ref_name }}"
+          to: jinzaizhichi9888@gmail.com
+          from: GitHub Actions <noreply@github.com>
+          body: |
+            你的 Neovim 配置已经成功推送到 ${{ github.ref_name }} 分支
+
+            仓库：${{ github.repository }}
+            提交信息：${{ github.event.head_commit.message }}
+            查看变更：https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+      - name: 失败发送邮件（理论上不会失败）
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Neovim 配置推送失败 - ${{ github.ref_name }}"
+          to: jinzaizhichi9888@gmail.com
+          body: 推送出现了问题，请检查网络或 GitHub 状态
