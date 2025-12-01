@@ -3,6 +3,12 @@ local options = {
     lua = { 'stylua' },
     css = { 'prettier' },
     html = { 'prettier' },
+    javascript = { 'prettier' },
+    typescript = { 'prettier' },
+    javascriptreact = { 'prettier' },
+    typescriptreact = { 'prettier' },
+    json = { 'prettier' },
+    markdown = { 'prettier' },
     yaml = { 'prettier', 'yamlfmt' },
     python = function(bufnr)
       if require('conform').get_formatter_info('ruff_format', bufnr).available then

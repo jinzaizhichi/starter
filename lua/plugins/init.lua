@@ -1,8 +1,8 @@
 return {
   {
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    opts = require "configs.conform",
+    'stevearc/conform.nvim',
+    event = 'BufWritePre', -- uncomment for format on save
+    opts = require('configs.conform'),
   },
 
   -- These are some examples, uncomment them if you want to see them work!
@@ -108,9 +108,9 @@ return {
   -- },
   --
   {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     config = function()
-      require "configs.lspconfig"
+      require('configs.lspconfig')
     end,
   },
 
@@ -149,45 +149,45 @@ return {
     },
   },
   {
-    "esmuellert/vscode-diff.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    'esmuellert/vscode-diff.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
     event = 'VeryLazy',
     config = function()
-      require("vscode-diff").setup({
+      require('vscode-diff').setup({
         -- Highlight configuration
         highlights = {
           -- Line-level: accepts highlight group names or hex colors (e.g., "#2ea043")
-          line_insert = "DiffAdd",      -- Line-level insertions
-          line_delete = "DiffDelete",   -- Line-level deletions
+          line_insert = 'DiffAdd', -- Line-level insertions
+          line_delete = 'DiffDelete', -- Line-level deletions
 
           -- Character-level: accepts highlight group names or hex colors
           -- If specified, these override char_brightness calculation
-          char_insert = nil,            -- Character-level insertions (nil = auto-derive)
-          char_delete = nil,            -- Character-level deletions (nil = auto-derive)
+          char_insert = nil, -- Character-level insertions (nil = auto-derive)
+          char_delete = nil, -- Character-level deletions (nil = auto-derive)
 
           -- Brightness multiplier (only used when char_insert/char_delete are nil)
           -- nil = auto-detect based on background (1.4 for dark, 0.92 for light)
-          char_brightness = nil,        -- Auto-adjust based on your colorscheme
+          char_brightness = nil, -- Auto-adjust based on your colorscheme
         },
 
         -- Diff view behavior
         diff = {
-          disable_inlay_hints = true,         -- Disable inlay hints in diff windows for cleaner view
-          max_computation_time_ms = 5000,     -- Maximum time for diff computation (VSCode default)
+          disable_inlay_hints = true, -- Disable inlay hints in diff windows for cleaner view
+          max_computation_time_ms = 5000, -- Maximum time for diff computation (VSCode default)
         },
 
         -- Keymaps in diff view
         keymaps = {
           view = {
-            next_hunk = "]c",   -- Jump to next change
-            prev_hunk = "[c",   -- Jump to previous change
-            next_file = "]f",   -- Next file in explorer mode
-            prev_file = "[f",   -- Previous file in explorer mode
+            next_hunk = ']c', -- Jump to next change
+            prev_hunk = '[c', -- Jump to previous change
+            next_file = ']f', -- Next file in explorer mode
+            prev_file = '[f', -- Previous file in explorer mode
           },
           explorer = {
-            select = "<CR>",    -- Open diff for selected file
-            hover = "K",        -- Show file diff preview
-            refresh = "R",      -- Refresh git status
+            select = '<CR>', -- Open diff for selected file
+            hover = 'K', -- Show file diff preview
+            refresh = 'R', -- Refresh git status
           },
         },
       })
