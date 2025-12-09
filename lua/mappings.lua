@@ -9,6 +9,7 @@ map('i', 'jj', '<ESC>')
 map('i', 'jk', '<ESC>')
 map({ 'n', 'i', 'v' }, '<C-s>', '<cmd> w <cr>')
 map('n', '<Leader>gb', '<Cmd>Gitsigns blame<CR>', { desc = 'Git Blame' })
+map('n', '<leader>gl', '<Cmd>Gitsigns toggle_current_line_blame<CR>', { desc = 'Git Current Line Blame' })
 -- map({ "n", "x" }, "mm", "<Cmd>Translate<CR>", { desc = " Translate" })
 --     keys = {
 --       -- 可以换成其他你想映射的键
