@@ -1,13 +1,14 @@
-require "nvchad.mappings"
+require('nvchad.mappings')
 
 -- add yours here
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jj", "<ESC>")
-map("i", "jk", "<ESC>")
-map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map('n', ';', ':', { desc = 'CMD enter command mode' })
+map('i', 'jj', '<ESC>')
+map('i', 'jk', '<ESC>')
+map({ 'n', 'i', 'v' }, '<C-s>', '<cmd> w <cr>')
+map('n', '<Leader>gb', '<Cmd>Gitsigns blame<CR>', { desc = 'Git Blame' })
 -- map({ "n", "x" }, "mm", "<Cmd>Translate<CR>", { desc = " Translate" })
 --     keys = {
 --       -- 可以换成其他你想映射的键
@@ -16,5 +17,5 @@ map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 --       -- 目前这个功能的视窗还没有做好，可以在配置里将view.i改成hover
 --       { "mi", "<Cmd>TranslateInput<CR>", desc = " Translate From Input" },
 --     },
-map("n", "ZZ", "<cmd> qa <CR>", { desc = "GENERAL Quit nvim" })
-map({ "n", "i" }, "<C-z>", ":undo <CR>", { desc = "GENERAL Undo" })
+map('n', 'ZZ', '<cmd> qa <CR>', { desc = 'GENERAL Quit nvim' })
+map({ 'n', 'i' }, '<C-z>', ':undo <CR>', { desc = 'GENERAL Undo' })
