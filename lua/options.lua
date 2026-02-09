@@ -2,6 +2,12 @@ require('nvchad.options')
 
 -- add yours here!
 local opt = vim.opt
+-- 强制使用 UTF-8
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8'
+
+-- 自动识别编码序列（增加对 GBK 等中文编码的识别）
+opt.fileencodings = 'ucs-bom,utf-8,gbk,cp936,gb18030,big5,latin1'
 local o = vim.o
 opt.relativenumber = true
 o.cursorlineopt = 'both' -- to enable cursorline!
