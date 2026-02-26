@@ -9,7 +9,8 @@ local options = {
     typescriptreact = { 'prettier' },
     json = { 'prettier' },
     markdown = { 'prettier' },
-    yaml = { 'prettier', 'yamlfmt' },
+    yaml = { 'yamlfmt' },
+    yml = { 'prettier' },
     python = function(bufnr)
       if require('conform').get_formatter_info('ruff_format', bufnr).available then
         return { 'ruff_format' }
