@@ -8,10 +8,22 @@ local M = {}
 M.base46 = {
 	theme = "onedark",
 
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+  -- hl_override = {
+  -- 	Comment = { italic = true },
+  -- 	["@comment"] = { italic = true },
+  -- },
+}
+M.mason.pkgs = {
+  "lua-language-server",
+  "javascript-language-server",
+  "stylua",
+  "html-lsp",
+  "css-lsp",
+  "prettier",
+  "black",
+  "debugpy",
+  "mypy",
+  "pyright",
 }
 
 -- M.nvdash = { load_on_startup = true }
