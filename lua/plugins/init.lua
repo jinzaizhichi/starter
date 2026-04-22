@@ -25,4 +25,28 @@ return {
   -- 		},
   -- 	},
   -- },
+
+  { "christoomey/vim-tmux-navigator" },
+
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {},
+  },
+  {
+    "greggh/claude-code.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require "configs.claude"
+    end,
+  },
+  {
+    "ishiooon/codex.nvim",
+    config = function()
+      require("codex").setup()
+    end,
+  },
 }
