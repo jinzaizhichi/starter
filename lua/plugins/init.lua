@@ -16,15 +16,24 @@ return {
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    event = "VeryLazy",
+    build = ":TSUpdate",
+    config = function()
+      pcall(function()
+        dofile(vim.g.base46_cache .. "syntax")
+        dofile(vim.g.base46_cache .. "treesitter")
+      end)
+      require("nvim-treesitter").setup({
+        ensure_installed = {
+          "vim", "lua", "vimdoc", "luadoc", "printf",
+          "html", "css", "python", "yaml", "bash",
+        },
+      })
+    end,
+  },
 
   { "christoomey/vim-tmux-navigator" },
 
@@ -34,19 +43,12 @@ return {
     opts = {},
   },
   {
-    "greggh/claude-code.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
+    "numToStr/Comment.nvim",
+    keys = {
+      { "<leader>/", mode = { "n", "v" }, desc = "toggle comment" },
     },
     config = function()
-      require "configs.claude"
-    end,
-  },
-  {
-    "ishiooon/codex.nvim",
-    config = function()
-      require("codex").setup()
+      require("Comment").setup()
     end,
   },
 }
