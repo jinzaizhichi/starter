@@ -1,11 +1,16 @@
 require "nvchad.mappings"
 
--- add yours here
-
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+-- ============================================================
+-- 通用
+-- ============================================================
+map("n", ";", ":", { desc = "进入命令行模式" })
+map("i", "jk", "<ESC>", { desc = "退出插入模式" })
+
+-- ============================================================
+-- 窗口 / 标签
+-- ============================================================
 
 -- lazygit 浮动终端
 map("n", "<leader>gg", function()
@@ -19,6 +24,11 @@ map("n", "<leader>gg", function()
     end,
   })
   lazygit:toggle()
-end, { desc = "Open lazygit" })
+end, { desc = "打开 lazygit" })
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+-- ============================================================
+-- Markdown
+-- ============================================================
+map("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Markdown 浏览器预览" })
+map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<CR>", { desc = "停止 Markdown 预览" })
+map("n", "<leader>mt", "<cmd>MarkdownPreviewToggle<CR>", { desc = "切换 Markdown 预览" })

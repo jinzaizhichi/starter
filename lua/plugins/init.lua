@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -37,6 +37,23 @@ return {
 
   { "christoomey/vim-tmux-navigator" },
 
+  -- Markdown 内部渲染
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    opts = {},
+  },
+
+  -- Markdown 浏览器预览
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    build = "cd app && yarn install",
+    config = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+  },
+
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -44,9 +61,7 @@ return {
   },
   {
     "numToStr/Comment.nvim",
-    keys = {
-      { "<leader>/", mode = { "n", "v" }, desc = "toggle comment" },
-    },
+    lazy = true,
     config = function()
       require("Comment").setup()
     end,

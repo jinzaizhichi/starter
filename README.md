@@ -1,9 +1,111 @@
-**This repo is supposed to be used as config by NvChad users!**
+# Nvim 快捷键速查
 
-- The main nvchad repo (NvChad/NvChad) is used as a plugin by this repo.
-- So you just import its modules , like `require "nvchad.options" , require "nvchad.mappings"`
-- So you can delete the .git from this repo ( when you clone it locally ) or fork it :)
+> 基于 NvChad + lazy.nvim，自定义快捷键在 `lua/mappings.lua`
 
-# Credits
+## 通用
 
-1) Lazyvim starter https://github.com/LazyVim/starter as nvchad's starter was inspired by Lazyvim's . It made a lot of things easier!
+| 快捷键 | 模式 | 功能 |
+|--------|------|------|
+| `jk` | 插入 | 退出插入模式 |
+| `;` | 普通 | 进入命令行模式（等价 `:`） |
+| `<C-s>` | 普通 | 保存文件 |
+| `<C-c>` | 普通 | 复制整个文件 |
+| `<Esc>` | 普通 | 清除搜索高亮 |
+| `<leader>n` | 普通 | 切换绝对行号 |
+| `<leader>rn` | 普通 | 切换相对行号 |
+| `<leader>ch` | 普通 | 打开快捷键速查 |
+| `<leader>wK` | 普通 | 打开 WhichKey |
+| `<leader>wk` | 普通 | WhichKey 关键字查询 |
+
+## 光标移动（插入模式）
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<C-b>` | 移到行首 |
+| `<C-e>` | 移到行尾 |
+| `<C-h>` | 左移 |
+| `<C-l>` | 右移 |
+| `<C-j>` | 下移 |
+| `<C-k>` | 上移 |
+
+## 窗口 / 标签
+
+| 快捷键 | 模式 | 功能 |
+|--------|------|------|
+| `<C-h>` | 普通 | 切换到左边窗口 |
+| `<C-l>` | 普通 | 切换到右边窗口 |
+| `<C-j>` | 普通 | 切换到下边窗口 |
+| `<C-k>` | 普通 | 切换到上边窗口 |
+| `<C-n>` | 普通 | 切换文件树 |
+| `<leader>e` | 普通 | 聚焦文件树 |
+| `<Tab>` | 普通 | 下一个标签 |
+| `<S-Tab>` | 普通 | 上一个标签 |
+| `<leader>b` | 普通 | 新建空白标签 |
+| `<leader>x` | 普通 | 关闭当前标签 |
+
+## 终端
+
+| 快捷键 | 模式 | 功能 |
+|--------|------|------|
+| `<leader>h` | 普通 | 下方新建终端 |
+| `<leader>v` | 普通 | 右侧新建终端 |
+| `<A-h>` | 普通/终端 | 切换下方浮动终端 |
+| `<A-v>` | 普通/终端 | 切换右侧浮动终端 |
+| `<A-i>` | 普通/终端 | 切换浮动终端 |
+| `<C-x>` | 终端 | 退出终端模式 |
+| `<leader>pt` | 普通 | 选择隐藏终端 |
+
+## 文件搜索（Telescope）
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<leader>ff` | 查找文件 |
+| `<leader>fa` | 查找所有文件（含隐藏/忽略） |
+| `<leader>fb` | 查找打开的缓冲区 |
+| `<leader>fh` | 查找帮助 |
+| `<leader>fw` | 全文搜索（live grep） |
+| `<leader>fo` | 最近打开的文件 |
+| `<leader>fz` | 当前缓冲区模糊搜索 |
+| `<leader>ma` | 查找标记 |
+
+## Git
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<leader>cm` | 查看 Git 提交历史 |
+| `<leader>gt` | 查看 Git 状态 |
+| `<leader>gg` | 打开 lazygit 浮动终端 |
+
+## LSP / 代码
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<leader>fm` | 格式化文件 |
+| `<leader>ds` | 诊断列表 |
+| `<leader>/` | 切换注释 |
+
+## Markdown
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<leader>mp` | 浏览器打开预览 |
+| `<leader>ms` | 关闭浏览器预览 |
+| `<leader>mt` | 切换浏览器预览 |
+
+## 主题
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<leader>th` | 切换主题 |
+
+---
+
+## 自定义新快捷键
+
+在 `lua/mappings.lua` 中添加：
+
+```lua
+map("n", "<leader>xx", "<cmd>你的命令<CR>", { desc = "功能描述" })
+```
+
+`<leader>` 默认为空格键。
