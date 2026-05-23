@@ -35,6 +35,14 @@ return {
     end,
   },
 
+  -- 自定义 snippet 路径（NvChad 原生支持，与 friendly-snippets 共存）
+  {
+    "L3MON4D3/LuaSnip",
+    init = function()
+      vim.g.lua_snippets_path = vim.fn.stdpath("config") .. "/lua/snippets/"
+    end,
+  },
+
   { "christoomey/vim-tmux-navigator" },
 
   -- Markdown 内部渲染
