@@ -4,6 +4,7 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     python = { "ruff_format", "ruff_organize_imports" },
+    markdown = { "prettier" },
   },
 
   format_on_save = {

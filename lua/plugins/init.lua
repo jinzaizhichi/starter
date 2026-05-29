@@ -1,4 +1,6 @@
 return {
+  -- 禁用 NvChad 内置 nvim-cmp，改用 blink.cmp
+  { "hrsh7th/nvim-cmp", enabled = false },
   {
     "stevearc/conform.nvim",
     event = 'BufWritePre', -- uncomment for format on save
@@ -13,8 +15,6 @@ return {
     end,
   },
 
-  -- test new blink
-  -- { import = "nvchad.blink.lazyspec" },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -30,16 +30,47 @@ return {
         ensure_installed = {
           "vim", "lua", "vimdoc", "luadoc", "printf",
           "html", "css", "python", "yaml", "bash",
+          "typescript", "javascript", "json", "markdown", "markdown_inline",
         },
       })
     end,
   },
 
-  -- 自定义 snippet 路径（NvChad 原生支持，与 friendly-snippets 共存）
+  -- blink.cmp 替代 nvim-cmp（Rust 原生，更快）
   {
-    "L3MON4D3/LuaSnip",
-    init = function()
-      vim.g.lua_snippets_path = vim.fn.stdpath("config") .. "/lua/snippets/"
+    "saghen/blink.cmp",
+    version = "*",
+    event = "InsertEnter",
+    dependencies = {
+      {
+        "L3MON4D3/LuaSnip",
+        dependencies = "rafamadriz/friendly-snippets",
+        init = function()
+          vim.g.lua_snippets_path = vim.fn.stdpath("config") .. "/lua/snippets/"
+        end,
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("luasnip").config.set_config(opts)
+          require("nvchad.configs.luasnip")
+        end,
+      },
+    },
+    opts = require "configs.blink",
+  },
+
+  -- nvim-autopairs（原为 nvim-cmp 依赖，需单独声明）
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+      fast_wrap = {},
+      disable_filetype = { "TelescopePrompt", "vim" },
+    },
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+      pcall(function()
+        require("nvim-autopairs.completion.blink").setup()
+      end)
     end,
   },
 
