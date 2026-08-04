@@ -3,7 +3,7 @@ return {
   { "hrsh7th/nvim-cmp", enabled = false },
   {
     "stevearc/conform.nvim",
-    event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -15,7 +15,6 @@ return {
     end,
   },
 
-
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
@@ -26,13 +25,26 @@ return {
         dofile(vim.g.base46_cache .. "syntax")
         dofile(vim.g.base46_cache .. "treesitter")
       end)
-      require("nvim-treesitter").setup({
+      require("nvim-treesitter").setup {
         ensure_installed = {
-          "vim", "lua", "vimdoc", "luadoc", "printf",
-          "html", "css", "python", "yaml", "bash",
-          "typescript", "javascript", "json", "markdown", "markdown_inline",
+          "vim",
+          "lua",
+          "vimdoc",
+          "luadoc",
+          "printf",
+          "html",
+          "css",
+          "python",
+          "yaml",
+          "bash",
+          "typescript",
+          "javascript",
+          "tsx",
+          "json",
+          "markdown",
+          "markdown_inline",
         },
-      })
+      }
     end,
   },
 
@@ -46,12 +58,12 @@ return {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
         init = function()
-          vim.g.lua_snippets_path = vim.fn.stdpath("config") .. "/lua/snippets/"
+          vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/snippets/"
         end,
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
-          require("nvchad.configs.luasnip")
+          require "nvchad.configs.luasnip"
         end,
       },
     },

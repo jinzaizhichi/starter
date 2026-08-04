@@ -5,6 +5,11 @@ local options = {
     html = { "prettier" },
     python = { "ruff_format", "ruff_organize_imports" },
     markdown = { "prettier" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
   },
 
   format_on_save = {
