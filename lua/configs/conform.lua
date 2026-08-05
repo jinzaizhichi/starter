@@ -10,6 +10,7 @@ local options = {
     javascriptreact = { "prettier" },
     typescriptreact = { "prettier" },
     json = { "prettier" },
+    gopls = { "prettie" },
   },
 
   format_on_save = {
