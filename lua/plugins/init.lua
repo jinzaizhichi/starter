@@ -15,36 +15,29 @@ return {
     end,
   },
 
+  -- treesitter：复用 NvChad 内置机制（branch=main、event、build=:TSUpdate|TSInstallAll、
+  -- 高亮 autocmd 均由 NvChad 提供），这里只补充要预装的 parser。
+  -- 之前的自定义 spec 用 config+setup 覆盖了 NvChad，导致 parser 从不安装、高亮失效。
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    event = "VeryLazy",
-    build = ":TSUpdate",
-    config = function()
-      pcall(function()
-        dofile(vim.g.base46_cache .. "syntax")
-        dofile(vim.g.base46_cache .. "treesitter")
-      end)
-      require("nvim-treesitter").setup {
-        ensure_installed = {
-          "vim",
-          "lua",
-          "vimdoc",
-          "luadoc",
-          "printf",
-          "html",
-          "css",
-          "python",
-          "yaml",
-          "bash",
-          "typescript",
-          "javascript",
-          "tsx",
-          "json",
-          "markdown",
-          "markdown_inline",
-        },
-      }
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "html",
+        "css",
+        "python",
+        "yaml",
+        "bash",
+        "typescript",
+        "javascript",
+        "tsx",
+        "json",
+        "markdown",
+        "markdown_inline",
+        "go",
+        "gomod",
+      })
+      return opts
     end,
   },
 
@@ -86,7 +79,17 @@ return {
     end,
   },
 
-  { "christoomey/vim-tmux-navigator" },
+  -- tmux 无缝导航：NvChad 默认 lazy=true，无触发条件则永不加载、映射失效，
+  -- 故用 keys 声明按键触发（懒加载 + 注册 <C-hjkl>）
+  {
+    "christoomey/vim-tmux-navigator",
+    keys = {
+      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "窗口/tmux 左移" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "窗口/tmux 下移" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "窗口/tmux 上移" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "窗口/tmux 右移" },
+    },
+  },
 
   -- Markdown 内部渲染
   {

@@ -10,7 +10,8 @@ local options = {
     javascriptreact = { "prettier" },
     typescriptreact = { "prettier" },
     json = { "prettier" },
-    gopls = { "prettie" },
+    -- Go 用 goimports（含 gofmt 格式化 + 自动整理 import），prettier 不支持 Go
+    go = { "goimports" },
   },
 
   format_on_save = {
