@@ -15,14 +15,14 @@ map("i", "jk", "<ESC>", { desc = "退出插入模式" })
 -- lazygit 浮动终端
 map("n", "<leader>gg", function()
   local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new({
+  local lazygit = Terminal:new {
     cmd = "lazygit",
     direction = "float",
     float_opts = { border = "curved" },
     on_close = function()
-      vim.cmd("checktime")
+      vim.cmd "checktime"
     end,
-  })
+  }
   lazygit:toggle()
 end, { desc = "打开 lazygit" })
 
@@ -32,3 +32,4 @@ end, { desc = "打开 lazygit" })
 map("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Markdown 浏览器预览" })
 map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<CR>", { desc = "停止 Markdown 预览" })
 map("n", "<leader>mt", "<cmd>MarkdownPreviewToggle<CR>", { desc = "切换 Markdown 预览" })
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
